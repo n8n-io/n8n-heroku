@@ -10,6 +10,7 @@ parse_url() {
 
 # prefix variables to avoid conflicts and run parse url function on arg url
 PREFIX="N8N_DB_" parse_url "$DATABASE_URL"
+echo "$N8N_DB_SCHEME://$N8N_DB_USER:$N8N_DB_PASSWORD@$N8N_DB_HOSTPORT/$N8N_DB_DATABASE"
 # Separate host and port    
 N8N_DB_HOST="$(echo $N8N_DB_HOSTPORT | sed -e 's,:.*,,g')"
 N8N_DB_PORT="$(echo $N8N_DB_HOSTPORT | sed -e 's,^.*:,:,g' -e 's,.*:\([0-9]*\).*,\1,g' -e 's,[^0-9],,g')"
