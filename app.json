@@ -38,7 +38,7 @@
       },
       "PGSSLMODE": {
         "description": "SSL is required to connect to Postgreson Heroku",
-        "value": "require"
+        "value": "no-verify"
       }
     },
     "formation": {
