@@ -35,6 +35,10 @@
       "WEBHOOK_URL": {
         "description": "Replace <appname> with your Heroku application name. This will ensure the correct webhook URLs are being shown in n8n.",
         "value": "https://<appname>.herokuapp.com"
+      },
+      "PGSSLMODE": {
+        "description": "SSL is required to connect to Postgreson Heroku",
+        "value": "require"
       }
     },
     "formation": {
