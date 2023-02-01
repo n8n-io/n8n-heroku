@@ -14,7 +14,7 @@
     "env": {
       "GENERIC_TIMEZONE": {
         "description": "Time Zone to use with Heroku. You can find the name of your timezone for example here: https://momentjs.com/timezone/.",
-        "value": "Europe/Berlin"
+        "value": "America/Chicago"
       },
       "N8N_ENCRYPTION_KEY": {
         "description": "Set the n8n encryption key to a static value to avoid Heroku overriding it (causing authentication to fail).",
@@ -36,12 +36,6 @@
       }
     },
     "addons": [
-      {
-        "plan": "heroku-postgresql",
-        "options": {
-          "version": "14"
-        }
-      },
       {
         "plan": "papertrail:choklad"
       }
