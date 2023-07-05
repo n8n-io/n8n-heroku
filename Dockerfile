@@ -7,6 +7,8 @@ WORKDIR /home/node/packages/cli
 
 COPY ./package.json ./
 COPY ./package-lock.json ./
+RUN npm install
+
 
 ENTRYPOINT []
 
