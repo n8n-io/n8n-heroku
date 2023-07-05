@@ -5,6 +5,8 @@ USER root
 WORKDIR /home/node/packages/cli
 
 
+# This let us install packages and used them in the code node
+# note that you will need to update NODE_FUNCTION_ALLOW_EXTERNAL in heroku dashboard
 COPY ./package.json ./
 COPY ./package-lock.json ./
 RUN npm install
