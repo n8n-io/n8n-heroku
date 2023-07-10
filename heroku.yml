@@ -2,7 +2,9 @@ setup:
     addons:
       - plan: heroku-postgresql
         as: DATABASE
-
+    config:
+      - N8N_ENCRYPTION_KEY: <RANDOM STRING>
+      - WEBHOOK_URL: <STRING>
 build:
     docker:
         web: Dockerfile
