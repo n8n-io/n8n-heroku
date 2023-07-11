@@ -3,6 +3,15 @@
 # check if port variable is set or go with default
 if [ -z ${PORT+x} ]; then echo "PORT variable not defined, leaving N8N to default port."; else export N8N_PORT="$PORT"; echo "N8N will start on '$PORT'"; fi
 
+# check if webhook_url exists if not use the app url
+if [ -z "${WEBHOOK_URL+x}" ]; then
+  echo "WEBHOOK_URL variable not defined, leaving N8N to default webhook url.";
+  export WEBHOOK_URL="$HEROKU_APP_DEFAULT_DOMAIN_NAME";
+else
+  export WEBHOOK_URL="$WEBHOOK_URL";
+  echo "N8N will use '$WEBHOOK_URL'";
+fi
+
 # regex function
 parse_url() {
   eval $(echo "$1" | sed -e "s#^\(\(.*\)://\)\?\(\([^:@]*\)\(:\(.*\)\)\?@\)\?\([^/?]*\)\(/\(.*\)\)\?#${PREFIX:-URL_}SCHEME='\2' ${PREFIX:-URL_}USER='\4' ${PREFIX:-URL_}PASSWORD='\6' ${PREFIX:-URL_}HOSTPORT='\7' ${PREFIX:-URL_}DATABASE='\9'#")
@@ -21,6 +30,8 @@ export DB_POSTGRESDB_PORT=$N8N_DB_PORT
 export DB_POSTGRESDB_DATABASE=$N8N_DB_DATABASE
 export DB_POSTGRESDB_USER=$N8N_DB_USER
 export DB_POSTGRESDB_PASSWORD=$N8N_DB_PASSWORD
+
+export WEBHOOK_URL=
 
 # kickstart nodemation
 n8n
