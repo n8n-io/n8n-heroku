@@ -1,4 +1,4 @@
-FROM n8nio/n8n:1.15.2
+FROM n8nio/n8n:ai-beta
 
 USER root
 
