@@ -1,4 +1,4 @@
-FROM n8nio/n8n:1.12.1
+FROM n8nio/n8n:1.10.1
 
 USER root
 
