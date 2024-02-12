@@ -2,6 +2,7 @@
   "name": "auto-muzzo-n8n",
   "version": "0.0.1",
   "dependencies": {
-    "@hubspot/api-client": "^9.0.0"
+    "@hubspot/api-client": "^9.0.0",
+    "sharp": "^0.33.2"
   }
 }
