@@ -11,16 +11,16 @@ fi
 # Use DATABASE_URL_WITH_SSL instead of DATABASE_URL
 DATABASE_URL=$DATABASE_URL_WITH_SSL
 
-# Regex function to parse URL
+# Function to parse URL
 parse_url() {
-  eval $(echo "$1" | sed -e "s#^\(\(.*\)://\)\?\(\([^:@]*\)\(:\(.*\)\)\?@\)\?\([^/?]*\)\(/\([^?]*\)\)\?#${PREFIX:-URL_}SCHEME='\2' ${PREFIX:-URL_}USER='\4' ${PREFIX:-URL_}PASSWORD='\6' ${PREFIX:-URL_}HOSTPORT='\7' ${PREFIX:-URL_}DATABASE='\9'#")
-  export ${PREFIX:-URL_}QUERY=$(echo "$1" | sed -e "s#.*?\(.*\)#\1#")
+  eval $(echo "$1" | sed -e "s#^\(\(.*\)://\)\?\(\([^:@]*\)\(:\(.*\)\)\?@\)\?\([^/?]*\)\(/[^?]*\)\?\?\(.*\)#${PREFIX:-URL_}SCHEME='\2' ${PREFIX:-URL_}USER='\4' ${PREFIX:-URL_}PASSWORD='\6' ${PREFIX:-URL_}HOSTPORT='\7' ${PREFIX:-URL_}DATABASE='\8' ${PREFIX:-URL_}QUERY='\9'#")
 }
 
-# Prefix variables to avoid conflicts and run parse URL function on arg URL
+# Parse the DATABASE_URL_WITH_SSL
 PREFIX="N8N_DB_" parse_url "$DATABASE_URL"
 echo "$N8N_DB_SCHEME://$N8N_DB_USER:$N8N_DB_PASSWORD@$N8N_DB_HOSTPORT/$N8N_DB_DATABASE"
-# Separate host and port    
+
+# Separate host and port
 N8N_DB_HOST="$(echo $N8N_DB_HOSTPORT | sed -e 's,:.*,,g')"
 N8N_DB_PORT="$(echo $N8N_DB_HOSTPORT | sed -e 's,^.*:,:,g' -e 's,.*:\([0-9]*\).*,\1,g' -e 's,[^0-9],,g')"
 
