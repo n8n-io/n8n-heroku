@@ -1,14 +1,22 @@
 #!/bin/sh
 
-# check if port variable is set or go with default
-if [ -z ${PORT+x} ]; then echo "PORT variable not defined, leaving N8N to default port."; else export N8N_PORT="$PORT"; echo "N8N will start on '$PORT'"; fi
+# Check if port variable is set or go with default
+if [ -z ${PORT+x} ]; then 
+  echo "PORT variable not defined, leaving N8N to default port."
+else 
+  export N8N_PORT="$PORT"
+  echo "N8N will start on '$PORT'"
+fi
 
-# regex function
+# Use DATABASE_URL_WITH_SSL instead of DATABASE_URL
+DATABASE_URL=$DATABASE_URL_WITH_SSL
+
+# Regex function
 parse_url() {
   eval $(echo "$1" | sed -e "s#^\(\(.*\)://\)\?\(\([^:@]*\)\(:\(.*\)\)\?@\)\?\([^/?]*\)\(/\(.*\)\)\?#${PREFIX:-URL_}SCHEME='\2' ${PREFIX:-URL_}USER='\4' ${PREFIX:-URL_}PASSWORD='\6' ${PREFIX:-URL_}HOSTPORT='\7' ${PREFIX:-URL_}DATABASE='\9'#")
 }
 
-# prefix variables to avoid conflicts and run parse url function on arg url
+# Prefix variables to avoid conflicts and run parse url function on arg url
 PREFIX="N8N_DB_" parse_url "$DATABASE_URL"
 echo "$N8N_DB_SCHEME://$N8N_DB_USER:$N8N_DB_PASSWORD@$N8N_DB_HOSTPORT/$N8N_DB_DATABASE"
 # Separate host and port    
@@ -23,5 +31,5 @@ export DB_POSTGRESDB_USER=$N8N_DB_USER
 export DB_POSTGRESDB_PASSWORD=$N8N_DB_PASSWORD
 export DB_POSTGRESDB_SSL=true  # Ensure SSL is enabled
 
-# kickstart nodemation
+# Kickstart nodemation
 n8n
