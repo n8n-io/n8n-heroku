@@ -33,10 +33,5 @@ export DB_POSTGRESDB_USER=$N8N_DB_USER
 export DB_POSTGRESDB_PASSWORD=$N8N_DB_PASSWORD
 export DB_POSTGRESDB_SSL=true  # Ensure SSL is enabled
 
-# Append SSL mode to the DATABASE_URL if not present
-if [[ ! "$DATABASE_URL" == *"?sslmode=require"* ]]; then
-  export DATABASE_URL="${DATABASE_URL}?sslmode=require"
-fi
-
 # Kickstart nodemation
 n8n
