@@ -18,11 +18,11 @@
       },
       "N8N_ENCRYPTION_KEY": {
         "description": "Set the n8n encryption key to a static value to avoid Heroku overriding it (causing authentication to fail).",
-        "value": "change-me-to-something-else"
+        "value": "N8NEIGHT"
       },
       "WEBHOOK_URL": {
         "description": "Replace <appname> with your Heroku application name. This will ensure the correct webhook URLs are being shown in n8n.",
-        "value": "https://<appname>.herokuapp.com"
+        "value": "https://n8n-development-9e518fa304de.herokuapp.com"
       },
       "DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED": {
         "description": "SSL is required to connect to Postgres on Heroku",
